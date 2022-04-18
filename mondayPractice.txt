@@ -1,0 +1,6 @@
+Learnt how to print integers in an array
+Learnt how to print character in an array
+Learnt how to print strings in an array
+Learnt how to add elements into a list
+Learnt how to print list items
+Learnt how to push files into github
