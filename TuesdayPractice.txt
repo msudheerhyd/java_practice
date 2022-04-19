@@ -1,0 +1,4 @@
+Learnt Maps today
+Learnt how to insert elements into Maps 
+Learnt how to print the key value and the elements
+
