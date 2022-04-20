@@ -1,0 +1,9 @@
+Learnt Linked List 
+How to insert elements into Linked List
+How to print Linked List 
+Data Structures that I learnt:-
+	Array
+	List
+	Map
+	LinkedList
+
