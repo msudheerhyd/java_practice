@@ -1,0 +1,13 @@
+Learnt Stack today
+How to insert elements into Stack
+How to push 
+How to pop
+How to print the updated stack
+
+Data Structures that I have learnt till now :
+	Array
+	List
+	Map
+	LinkedList
+	Stack
+
