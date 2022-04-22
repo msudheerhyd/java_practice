@@ -1,0 +1,8 @@
+What I have learnt today:
+	1. Queue
+	2. Inserting Strings into Queue.
+	3. Polling out elements from the queue
+
+
+
+
