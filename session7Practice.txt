@@ -1,0 +1,15 @@
+What I have done today: 
+	1. Printing elements from the array.
+	2. Printing elements from the list.
+	3. Printing elements from the map.
+	4. Printing elements from the LinkedList.
+	5. Printing elements from the Stack
+	6. Printing elements from the Queue.
+
+Data Structures that I have learnt till now:
+	1. Array
+	2. List
+	3. Map
+	4. Stack
+	5. LinkedList
+	6. Queue
