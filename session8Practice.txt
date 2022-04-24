@@ -1,0 +1,5 @@
+What I have learnt today:
+	Class
+	How to create an object
+	How to print elements.
+
