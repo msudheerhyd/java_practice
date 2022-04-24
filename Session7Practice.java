@@ -31,9 +31,13 @@ public class Session7Practice {
 	
 	
 	public static void main(String[] args) {
+		
+		// Printing Array
 		String[] str1 = {"Music", "Dance", "Gym", "Fifa", "Sleep"}; 
 		printStringArray(str1);
 		
+		
+		// Printing List
 		List<String> myList = new ArrayList<String>();
 		myList.add("Buddha and his Dhamma");
 		myList.add("Social Studies");
@@ -42,6 +46,8 @@ public class Session7Practice {
 		myList.add("Python");
 		printStringList(myList);
 		
+		
+		//Printing Map
 		Map<Integer, String> myMap = new HashMap<Integer, String>();
 		myMap.put(1, "Dress");
 		myMap.put(2, "Purse");
@@ -54,6 +60,8 @@ public class Session7Practice {
 		System.out.println(myMap.get(4));
 		System.out.println(myMap.get(1));
 		
+		
+		//Printing LinkedList
 		LinkedList<String> myLinkedList = new LinkedList<String>();
 		myLinkedList.add("House");
 		myLinkedList.add("Tree");
@@ -66,6 +74,7 @@ public class Session7Practice {
 		System.out.println("The first element in the list is: " + myLinkedList.getFirst());
 		System.out.println("The last element in the list is: " + myLinkedList.getLast());
 		
+		//Printing Stack
 		Stack<String> myStack = new Stack<String>();
 		myStack.push("Pen");
 		myStack.push("Paper");
@@ -79,6 +88,8 @@ public class Session7Practice {
 		System.out.println("The popped out item from the stack is: " + myStack.pop());
 		System.out.println(myStack);
 		
+		
+		//Printing Queue
 		Queue<String> myQueue = new LinkedList<String>();
 		myQueue.add("Rubber");
 		myQueue.add("Headphones");
