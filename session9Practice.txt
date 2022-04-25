@@ -1,0 +1,13 @@
+What I have learnt today:
+	Creating a class
+	How to write a method to print objects of a class using toString() method.
+
+Data Structures that I have learnt till now:
+	1.array
+	2.List
+	3.Map
+	4.LinkedList
+	5.Stack
+	6.Queue
+
+
