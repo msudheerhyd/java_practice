@@ -1,0 +1,7 @@
+What I have learnt today:
+	How to create a class
+	How to create objects and print them.
+	How to create a constructor
+	How to pass parameters into constructor
+
+Meditation = 8 times.
