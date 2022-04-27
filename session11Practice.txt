@@ -1,0 +1,12 @@
+What I have learnt today:
+	1.How to create a contructor
+	2.How to create list with class
+	3.How to add objects to the list
+	
+	4.How to create map with class
+	5.How to add objects to the map
+	6.How to print the list and map
+
+
+
+Meditation : 8 + 13 = 21 Times 
