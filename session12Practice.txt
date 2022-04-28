@@ -1,0 +1,7 @@
+What I have learnt today :
+	1.Inheritance
+	2.How to create a class through inheritance
+	3.How to use parent objects in child object
+
+
+
