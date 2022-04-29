@@ -1,0 +1,12 @@
+What I have learnt today :
+	How to create a Vehicle( (Parent) class
+	How to create a car (Child) class
+	How to write a method in class and override the method in the child class
+	How to print them using toString()
+
+	1. ls | grep searchString
+	2. date
+	3. Shift A goes to the last position in same line   shortcut in vim
+	4. gg to go to the first position in vim
+	5. Shift g to go to the last position in vim 
+	6. Shift I goes to the first position in same line 
