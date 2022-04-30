@@ -1,0 +1,5 @@
+What I have learnt today:
+	Java Encapsulation :
+		1. Getters method
+		2. Setters method
+		
