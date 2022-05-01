@@ -1,0 +1,5 @@
+What I have learnt today:
+	1. Method overriding
+		i. How to write a method in parent class
+		ii.How to use inheritence using 'e'
+		iii. How to override the functions.
