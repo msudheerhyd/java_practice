@@ -1,4 +1,12 @@
 What I have learnt today :
 	1. Polymorphism
 	2. Method Overloading
+	3. Abstraction
+	
+	Java concepts I have learnt till now: 
+		1. Inheritence
+		2. Polymorphism
+		3. Encapsulation
+		4. Abstraction
+
 
