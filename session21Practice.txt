@@ -8,6 +8,6 @@ What I have learnt today:
 Inheritence: 	Child class extending parent class
 Polymorphism: 	Method Overriding and Method Overloading
 Abstraction:  	Abstract classes and interface
-Encapsulation: 	Getters and putters
+Encapsulation: 	Getters and Setters
 
 
