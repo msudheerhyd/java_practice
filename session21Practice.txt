@@ -2,3 +2,12 @@ What I have learnt today:
 	Acces Modifiers: 
 		1. Public 
 		2. Private
+
+
+
+Inheritence: 	Child class extending parent class
+Polymorphism: 	Method Overriding and Method Overloading
+Abstraction:  	Abstract classes and interface
+Encapsulation: 	Getters and putters
+
+
