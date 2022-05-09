@@ -1,0 +1,8 @@
+What I have learnt today:
+	1. While Loop
+
+What I have learnt till now:
+	1. Inheritence: Child Class extending Parent class
+	2. Encapsulation: Getters and Setters
+	3. Polymorphism: Method Overriding and Method Overloading
+	4. Abstraction: Interface, Child class implementing Abstract Parent class.
