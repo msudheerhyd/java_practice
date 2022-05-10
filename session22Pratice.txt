@@ -1,0 +1,10 @@
+What I have learnt today:
+	1. How to use Scanner(System.in) to take the input from the user.
+
+
+
+Concepts that I have learnt till now: 
+	1. Inheritence : Child class extending Parent class
+	2. Encapsulation : Getters and Setters
+	3. Polymorphism : Method Overloading and Method Overriding
+	4. Abstraction : Abstract class and Interface
