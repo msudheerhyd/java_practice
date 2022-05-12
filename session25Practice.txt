@@ -1,0 +1,5 @@
+What I have learnt today: 
+	1. Data types:
+		i. int
+		ii. double
+		iii. Conversion of int to double and double to int.
