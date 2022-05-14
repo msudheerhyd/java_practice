@@ -2,4 +2,6 @@ What I have learnt today:
 	1. continue
 	2. break
 
-
+Abstraction: 
+	1. Child class extending Abstract class
+	2. Child class implementing Interface  
