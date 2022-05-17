@@ -1,3 +1,7 @@
 What I have learnt today: 
 	1. Files
 	2. Opening an existing file and printing the data in it
+
+SQL that I have learnt till now:
+	1. SELECT 
+	

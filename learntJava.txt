@@ -1,0 +1,28 @@
+Learnt Linked List 
+How to insert elements into Linked List
+How to print Linked List 
+Data Structures that I learnt:-
+	Array
+	List
+	Map
+	LinkedList
+
+
+Integer Array
+Char Array
+Array List
+Addition of elements to list
+Deletion of elements from list
+Printing array
+Printing list
+Learnt Git
+	git status
+	ls
+	mkdir
+	cd ..
+	git log
+	git commit -m
+	vim
+	git push
+	:wq
+	
