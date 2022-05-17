@@ -1,0 +1,3 @@
+What I have learnt today: 
+	1. Files
+	2. Opening an existing file and printing the data in it
