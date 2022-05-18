@@ -285,4 +285,15 @@ What I have learnt today:
 
 SQL that I have learnt till now:
 	1. SELECT 
-	
+
+
+
+
+
+SELECT DISTINCT SupplierID FROM Products
+
+
+
+What I have learnt today:
+	1. Iterator
+	2. How to print the list of array elements through Iterator	
