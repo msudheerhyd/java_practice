@@ -25,4 +25,264 @@ Learnt Git
 	vim
 	git push
 	:wq
+
+Learnt how to print integers in an array
+Learnt how to print character in an array
+Learnt how to print strings in an array
+Learnt how to add elements into a list
+Learnt how to print list items
+Learnt how to push files into github
+
+
+Learnt Stack today
+How to insert elements into Stack
+How to push 
+How to pop
+How to print the updated stack
+
+
+
+Data Structures that I have learnt till now :
+	Array
+	List
+	Map
+	LinkedList
+	Stack
+
+
+
+What I have learnt today:
+	1.Queue
+	2.Inserting elements into Queue
+	3.Polling out elements from the queue
+
+Data structures that I have learnt till now:
+	1.Array
+	2.List
+	3.Map
+	4.LinkedList
+	5.Stack
+	6.Queue
+
+
+
+What I have done today: 
+	1. Printing elements from the array.
+	2. Printing elements from the list.
+	3. Printing elements from the map.
+	4. Printing elements from the LinkedList.
+	5. Printing elements from the Stack
+	6. Printing elements from the Queue.
+
+Data Structures that I have learnt till now:
+	1. Array
+	2. List
+	3. Map
+	4. Stack
+	5. LinkedList
+	6. Queue
+
+
+
+
+What I have learnt today:
+	Class
+	How to create an object
+	How to print elements.
+
+
+
+
+What I have learnt today:
+	Creating a class
+	How to write a method to print objects of a class using toString() method.
+
+Data Structures that I have learnt till now:
+	1.array
+	2.List
+	3.Map
+	4.LinkedList
+	5.Stack
+	6.Queue
+
+
+
+What I have learnt today:
+	How to create a class
+	How to create objects and print them.
+	How to create a constructor
+	How to pass parameters into constructor
+
+Meditation = 8 times.
+
+
+
+
+
+What I have learnt today:
+	1.How to create a contructor
+	2.How to create list with class
+	3.How to add objects to the list
+	
+	4.How to create map with class
+	5.How to add objects to the map
+	6.How to print the list and map
+
+
+
+Meditation : 8 + 13 = 21 Times 
+
+
+
+
+
+   
+What I have learnt today :
+	1.Inheritance
+	2.How to create a class through inheritance
+	3.How to use parent objects in child object
+
+
+
+
+
+What I have learnt today :
+	How to create a Vehicle( (Parent) class
+	How to create a car (Child) class
+	How to write a method in class and override the method in the child class
+	How to print them using toString()
+
+	1. ls | grep searchString
+	2. date
+	3. Shift A goes to the last position in same line   shortcut in vim
+	4. gg to go to the first position in vim
+	5. Shift g to go to the last position in vim 
+	6. Shift I goes to the first position in same line 
+
+
+
+
+What I have learnt today:
+	Java Encapsulation :
+		1. Getters method
+		2. Setters method
+
+
+What I have learnt today:
+	1. Method overriding
+		i. How to write a method in parent class
+		ii.How to use inheritence using 'e'
+		iii. How to override the functions.
+
+
+
+
+
+   
+What I have learnt today :
+	1. Polymorphism
+	2. Method Overloading
+	3. Abstraction
+	
+	Java concepts I have learnt till now: 
+		1. Inheritence
+		2. Polymorphism
+		3. Encapsulation
+		4. Abstraction
+
+
+
+
+What I have learnt today :
+	1. Abstraction
+	2. Abstract Method
+
+
+What I have learnt today :
+	1. Interface (Fully Abstract)
+	2. Class implements
+
+
+
+
+What I have learnt today:
+	Acces Modifiers: 
+		1. Public 
+		2. Private
+
+
+
+Inheritence: 	Child class extending parent class
+Polymorphism: 	Method Overriding and Method Overloading
+Abstraction:  	Abstract classes and interface
+Encapsulation: 	Getters and Setters
+
+
+
+
+
+What I have learnt today:
+	1. While Loop
+
+What I have learnt till now:
+	1. Inheritence: Child Class extending Parent class
+	2. Encapsulation: Getters and Setters
+	3. Polymorphism: Method Overriding and Method Overloading
+	4. Abstraction: Interface, Child class implementing Abstract Parent class.
+
+
+
+
+   
+What I have learnt today: 
+	1. Creating a class in a different file
+	2. Importing a file from a different package
+
+
+What I have learnt today: 
+	1. Data types:
+		i. int
+		ii. double
+		iii. Conversion of int to double and double to int.
+
+
+What I have learnt today :
+	1. Switch
+	2. Break
+
+
+
+
+   
+What I have learnt today: 
+	1. continue
+	2. break
+
+Abstraction: 
+	1. Child class extending Abstract class
+	2. Child class implementing Interface 
+
+
+
+
+What I have learnt today: 
+	1. Try
+	2. Catch
+
+
+
+
+
+   
+What I have learnt today: 
+	1. Files
+	2. Creating file
+
+
+What I have learnt today: 
+	1. Files
+	2. Opening an existing file and printing the data in it
+
+SQL that I have learnt till now:
+	1. SELECT 
 	
