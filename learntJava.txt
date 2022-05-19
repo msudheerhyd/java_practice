@@ -297,3 +297,21 @@ SELECT DISTINCT SupplierID FROM Products
 What I have learnt today:
 	1. Iterator
 	2. How to print the list of array elements through Iterator	
+
+
+SELECT * FROM [Products] WHERE SupplierID = 1
+
+SELECT * FROM [Products] WHERE PRICE > 40
+
+SELECT * FROM [Products]
+WHERE Price < 30
+
+
+SELECT * FROM [Products]
+WHERE Price <> 18
+
+SELECT * FROM [Products]
+WHERE Price BETWEEN 20 AND 30
+
+SELECT * FROM [Customers]
+WHERE City in ('Berlin', 'London')
