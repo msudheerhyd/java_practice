@@ -1,3 +1,9 @@
+No. of Projects done = 35
+
+
+
+
+
 Learnt Linked List 
 How to insert elements into Linked List
 How to print Linked List 
@@ -315,3 +321,13 @@ WHERE Price BETWEEN 20 AND 30
 
 SELECT * FROM [Customers]
 WHERE City in ('Berlin', 'London')
+
+
+SELECT * FROM Categories
+WHERE CategoryName = 'Condiments';
+
+
+What I have learnt today: 
+	1. Pattern
+	2. Matcher
+
