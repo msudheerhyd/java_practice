@@ -331,3 +331,25 @@ What I have learnt today:
 	1. Pattern
 	2. Matcher
 
+
+SELECT * FROM [Customers]
+WHERE City = 'Berlin' AND Country = 'Germany';
+
+
+SELECT * FROM [Customers]
+WHERE City = 'Berlin' or Country = 'Mexico';
+
+SELECT * FROM [Customers]
+WHERE Country = 'Sweden' OR Country = 'Spain';
+
+
+SELECT * FROM [Customers]
+WHERE NOT Country = 'Spain';
+
+
+SELECT * FROM [Customers]
+WHERE Country = 'Germany' AND (City = 'Berlin' OR 'Munchen');
+
+
+SELECT * FROM [Customers]
+WHERE NOT Country = 'USA' AND NOT Country = 'Germany';
