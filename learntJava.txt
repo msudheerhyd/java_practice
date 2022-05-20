@@ -352,4 +352,10 @@ WHERE Country = 'Germany' AND (City = 'Berlin' OR 'Munchen');
 
 
 SELECT * FROM [Customers]
-WHERE NOT Country = 'USA' AND NOT Country = 'Germany';
+WHERE NOT Country = 'USA' AND NOT Country = 'Germany';'
+
+
+What I have learnt today:
+	1.Thread
+
+
