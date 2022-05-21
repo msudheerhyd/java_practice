@@ -1,4 +1,4 @@
-No. of Projects done = 35
+No. of Projects done = 39
 
 
 
@@ -359,3 +359,20 @@ What I have learnt today:
 	1.Thread
 
 
+
+SELECT * FROM Customers 
+ORDER BY Country;
+
+
+SELECT * FROM Customers
+ORDER BY Country DESC;
+
+SELECT * FROM Customers
+ORDER BY Country, CustomerName;
+
+SELECT * FROM Customers
+ORDER BY Country ASC, CustomerName DESC;
+
+
+What  have learnt today:
+	1. Math Library
