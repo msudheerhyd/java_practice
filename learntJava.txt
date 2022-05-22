@@ -1,4 +1,4 @@
-No. of Projects done = 39
+No. of Projects done = 41
 
 
 
@@ -376,3 +376,15 @@ ORDER BY Country ASC, CustomerName DESC;
 
 What  have learnt today:
 	1. Math Library
+
+
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Sunil', 'Linus', '123 Herkimer St', 'Kansas', '600060', "USA");
+
+INSERT INTO Customers (CustomerName, ContactName, Country)
+VALUES ('Vengaiah', 'Radcliffe', 'India');
+
+What I have learnt today:
+	1. HashSet
+
+
