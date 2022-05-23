@@ -1,4 +1,4 @@
-No. of Projects done = 41
+No. of Projects done = 43
 
 
 
@@ -386,5 +386,13 @@ VALUES ('Vengaiah', 'Radcliffe', 'India');
 
 What I have learnt today:
 	1. HashSet
+
+SELECT CustomerName, ContactName, Address
+FROM Customers 
+WHERE Address IS NULL;
+
+SELECT CustomerName, ContactName, Address 
+FROM Customers
+WHERE Address IS NOT NULL;
 
 
