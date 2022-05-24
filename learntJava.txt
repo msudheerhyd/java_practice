@@ -1,4 +1,4 @@
-No. of Projects done = 43
+No. of Projects done = 46
 
 
 
@@ -395,4 +395,13 @@ SELECT CustomerName, ContactName, Address
 FROM Customers
 WHERE Address IS NOT NULL;
 
+UPDATE Customers
+SET ContactName = 'Lewandowski', City = "Bayern"
+WHERE CustomerId = 2;
 
+UPDATE Customers
+SET ContactName = 'Linus'
+WHERE Country = 'Mexico';
+
+What I have learnt today:
+	1. Recursion
