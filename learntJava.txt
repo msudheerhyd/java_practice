@@ -1,4 +1,4 @@
-No. of Projects done = 46
+No. of Projects done = 48
 
 
 
@@ -405,3 +405,19 @@ WHERE Country = 'Mexico';
 
 What I have learnt today:
 	1. Recursion
+
+SELECT TOP 9 * FROM Customers;
+
+SELECT * FROM Customers LIMIT 10;
+
+
+SELECT TOP 50 PERCENT * FROM Customers;
+
+SELECT TOP 5 * FROM Customers 
+WHERE Country = 'Germany';
+
+SELECT * FROM Customers
+WHERE Country = 'Germany'
+LIMIT 5;
+
+
