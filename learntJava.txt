@@ -1,4 +1,4 @@
-No. of Projects done = 48
+No. of Projects done = 49
 
 
 
@@ -419,5 +419,11 @@ WHERE Country = 'Germany';
 SELECT * FROM Customers
 WHERE Country = 'Germany'
 LIMIT 5;
+
+SELECT MIN(Price) As SmallestPrice
+FROM Products;
+
+SELECT MAX(Price) AS LargestPrice
+FROM Products;
 
 
