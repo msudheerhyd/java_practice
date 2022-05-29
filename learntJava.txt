@@ -426,4 +426,15 @@ FROM Products;
 SELECT MAX(Price) AS LargestPrice
 FROM Products;
 
+SELECT COUNT(ProductID) AS TotalProducts
+FROM Products;
+
+
+SELECT AVG(Price) AS AveragePrice
+FROM Products;
+
+
+SELECT SUM(Quantity) AS SumOfProducts
+FROM OrderDetails;
+
 
