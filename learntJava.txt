@@ -1,4 +1,4 @@
-No. of Projects done = 50
+No. of Projects done = 51
 
 
 
@@ -458,4 +458,28 @@ WHERE ContactName LIKE 'a%o';
 
 SELECT * FROM Customers
 WHERE CustomerName NOT LIKE 'b%';
+
+SELECT * FROM Customers
+WHERE City LIKE 'ber%';
+
+SELECT * FROM Customers
+WHERE Country LIKE '%ce%';
+
+SELECT * FROM Customers
+WHERE City LIKE '_ondon';
+
+SELECT * FROM Customers
+WHERE City LIKE 'L_n_on';
+
+SELECT * FROM Customers
+WHERE Country LIKE '[GSU]%';
+
+SELECT * FROM Customers
+WHERE City LIKE '[A-C]%';
+
+SELECT * FROM Customers
+WHERE City LIKE '[!BSP]%';
+
+SELECT * FROM Customers
+WHERE City NOT LIKE '[BSP]%';
 
