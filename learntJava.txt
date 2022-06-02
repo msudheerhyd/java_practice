@@ -1,4 +1,4 @@
-No. of Projects done = 51
+No. of Projects done = 52
 
 
 
@@ -483,3 +483,12 @@ WHERE City LIKE '[!BSP]%';
 SELECT * FROM Customers
 WHERE City NOT LIKE '[BSP]%';
 
+SELECT * FROM Customers
+WHERE Country IN ('Germany', 'UK', 'France');
+
+SELECT * FROM Customers
+WHERE Country NOT IN ('Germany', 'France', 'UK');
+
+
+SELECT * FROM Customers
+WHERE Country IN (SELECT Country FROM Suppliers);
