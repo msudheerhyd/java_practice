@@ -1,4 +1,4 @@
-No. of Projects done = 66
+No. of Projects done = 68
 
 
 
@@ -549,3 +549,9 @@ INNER JOIN Customers ON Orders.CustomerId=Customers.CustomerId;
 SELECT Orders.OrderID, Customers.CustomerName
 FROM Orders 
 INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID
+
+SELECT Customers.CustomerName, Orders.OrderID
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+ORDER BY Customers.CustomerName;
+
