@@ -1,4 +1,4 @@
-No. of Projects done = 70
+No. of Projects done = 72
 
 
 
@@ -561,3 +561,8 @@ FROM Orders
 RIGHT JOIN Employees
 ON Orders.EmployeeID = Employees.EmployeeID
 ORDER BY Orders.OrderID;
+
+SELECT Customers.CustomerName, Orders.OrderID
+FROM Customers
+FULL OUTER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+ORDER BY Customers.CustomerName;
