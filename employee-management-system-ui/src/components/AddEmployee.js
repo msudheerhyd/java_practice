@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import EmployeeService from '../services/EmployeeService';
 
 const AddEmployee = () => {
 
-    const [employee, setemployee] = useState({
+    const [employee, setEmployee] = useState({
         id: "",
         firstName: "",
         lastName: "",
@@ -12,7 +13,18 @@ const AddEmployee = () => {
         const handleChange = (e) => {
             const value = e.target.value;
             setEmployee({ ...employee,[e.target.name]: value });
-        }
+        };
+
+        const saveEmployee = (e) => {
+            e.preventDefault();
+            EmployeeService.saveEmployee(employee)
+            .then((response) => {
+                console.log(response)
+             }) 
+             .catch((error) => {
+                console.log(error);
+             });
+        };
 
   return (
     <div className="flex max-w-2xl mx-auto shadow border-b">
