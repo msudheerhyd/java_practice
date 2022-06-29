@@ -1,4 +1,4 @@
-No. of Projects done = 77
+No. of Projects done = 78
 
 
 
@@ -650,3 +650,24 @@ SELECT ProductName
 FROM Products
 WHERE ProductID = ALL (SELECT ProductID FROM OrderDetails WHERE Quantity = 10);
 
+SELECT * INTO CustomersBackup2017
+FROM Customers;
+
+SELECT * INTO CustomersBackup2017 IN 'Backup.mdb'
+FROM Customers;
+
+SELECT CustomerName, ContactName INTO CustomersBackup2017
+FROM Customers;
+
+SELECT * INTO CustomersGermany
+FROM Customers
+WHERE Country = 'Germany';
+
+SELECT Customers.CustomerName, Orders.OrderID
+INTO CustomersOrderBackup2017
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+
+SELECT * INTO newtable
+FROM oldtable
+WHERE 1 = 0;
