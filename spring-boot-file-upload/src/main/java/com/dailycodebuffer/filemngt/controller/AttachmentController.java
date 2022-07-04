@@ -50,4 +50,4 @@ public class AttachmentController {
                                 + "\"")
                 .body(new ByteArrayResource(attachment.getData()));
     }
-}   
+}
