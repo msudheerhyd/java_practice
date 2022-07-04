@@ -1,4 +1,4 @@
-No. of Projects done = 78
+No. of Projects done = 79
 
 
 
@@ -697,3 +697,9 @@ ORDER BY (CASE
 WHEN City IS NULL THEN Country
 ELSE City
 END);
+
+SELECT ProductName, UnitPrice * (UnitsInStock + ISNULL(UnitsOnOrder, 0))
+FROM Products;
+
+SELECT ProductName, UnitPrice * (UnitsInStock + COALESCE(UnitsOnOrder, 0))
+FROM Products;
