@@ -725,3 +725,59 @@ GO;
 
 EXEC SelectAllCustomers @City = 'London', @PostalCode = 'WA1 1DP'
 
+
+SELECT * FROM Customers WHERE (CustomerName LIKE 'L%'
+OR CustomerName LIKE 'R%' /*OR CustomerName LIKE 'S%'
+OR CustomerName LIKE 'T%'*/ OR CustomerName LIKE 'W%')
+AND Country='USA'
+ORDER BY CustomerName;
+
+SELECT * FROM Products
+WHERE Price = 18;
+
+SELECT * FROM Products
+WHERE Price > 30;
+
+SELECT * FROM Products
+WHERE Price < 30;
+
+SELECT * FROM Products
+WHERE Price >= 30;
+
+SELECT * FROM Products
+WHERE Price <= 30;
+
+SELECT * FROM Products
+WHERE Price <> 18;
+
+SELECT ProductName 
+FROM Products
+WHERE ProductID = ALL (SELECT ProductID FROM OrderDetails WHERE Quantity = 10);
+
+SELECT * FROM Customers
+WHERE City = "London" AND Country = "UK";
+
+SELECT * FROM Products
+WHERE Price > ANY (SELECT Price FROM Products WHERE Price > 50);
+
+SELECT * FROM Products
+WHERE Price BETWEEN 50 AND 60;
+
+SELECT SupplierName
+FROM Suppliers
+WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);
+
+SELECT * FROM Customers
+WHERE City IN ('Paris','London');
+
+SELECT * FROM Customers
+WHERE City LIKE 's%';
+
+SELECT * FROM Customers
+WHERE City NOT LIKE 's%';
+
+SELECT * FROM Customers
+WHERE City = "London" OR Country = "UK";
+
+SELECT * FROM Products
+WHERE Price > SOME (SELECT Price FROM Products WHERE Price > 20);
