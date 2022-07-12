@@ -1,4 +1,4 @@
-No. of Projects done = 79
+No. of Projects done = 80
 
 
 
@@ -781,3 +781,17 @@ WHERE City = "London" OR Country = "UK";
 
 SELECT * FROM Products
 WHERE Price > SOME (SELECT Price FROM Products WHERE Price > 20);
+
+BACKUP DATABASE databasename
+TO DISK = 'filepath';	
+
+BACKUP DATABASE databasename
+TO DISK = 'filepath'
+WITH DIFFERENTIAL;
+
+BACKUP DATABASE testDB
+TO DISK = 'D:\backups\testDB.bak';
+
+BACKUP DATABASE testDB
+TO DISK = 'D:\backups\testDB.bak'
+WITH DIFFERENTIAL;
