@@ -808,3 +808,13 @@ City varchar(255)
 CREATE TABLE TestTable AS
 SELECT customername, contactname
 FROM customers;
+
+DROP TABLE Shippers;
+
+TRUNCATE TABLE table_name;
+
+ALTER TABLE Customers
+ADD Email varchar(255);
+
+ALTER TABLE Customers
+DROP COLUMN Email;
