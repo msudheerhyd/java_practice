@@ -36,10 +36,12 @@
             img.src="portrait1.png";
 
             const livePoints={
-                A:{x:0,y:-0.13,xRange:[0,0.2],yRange:[-0.13,0.1]},
-                B:{x:0,y:-0.77,xRange:[0,0.02],yRange:[-0.77,-0.73]} 
+                A:{x:0,y:-0.13,xRange:[0,0.2],yRange:[-0.13,0.1],xOffset:0,yOffset:0},
+                B:{x:0,y:-0.77,xRange:[0,0.02],yRange:[-0.77,-0.73],xOffset:0,yOffset:0},
+                C:{x:0,y:0.46,xRange:[0,0.2],yRange:[0.46,0.48],yNegRange:[0.46,0.30],xOffset:0,yOffset:0}
+                
             }
-            const {A,B}=livePoints;
+            const {A,B,C}=livePoints;
 
 
             img.onload=function(){
@@ -61,7 +63,11 @@
             function getCoords(evt){
                 const x=(evt.x-canvas.width/2)/(canvas.width/2);
                 const y=(evt.y-canvas.height/2)/(canvas.height/2);
-                console.log(x.toFixed(2)+","+y.toFixed(2)); 
+                const offset={
+                    x:x-A.x,
+                    y:y-A.y
+                }
+                console.log(offset.x.toFixed(2)+","+offset.y.toFixed(2)); 
             }
 
 
@@ -69,15 +75,16 @@
                 drawBody();
                 drawHead();
 
-                drawPoint(A,"A");
+                //drawPoint(A,"A");
                 drawPoint(B,"B");
+                drawPoint(C,"C");
             }
 
             function drawHead(){
                 
                 ctx.beginPath();
                 ctx.moveTo(B.x,B.y);
-                ctx.quadraticCurveTo(A.x,A.y,0,0.46);
+                ctx.quadraticCurveTo(A.x,A.y,C.x,C.y);
                 ctx.moveTo(-0.5,-0.13);
                 ctx.quadraticCurveTo(A.x,A.y,0.5,-0.13);
                 ctx.stroke();
@@ -85,10 +92,76 @@
                 ctx.beginPath();
                 ctx.moveTo(B.x,B.y);
                 ctx.quadraticCurveTo(-0.44,-0.71,-0.5,-0.13);
-                ctx.quadraticCurveTo(-0.37,0.28,0,0.46);
+                ctx.quadraticCurveTo(-0.37,0.28,C.x,C.y);
                 ctx.quadraticCurveTo(0.37,0.28,0.5,-0.13);
                 ctx.quadraticCurveTo(0.44,-0.71,B.x,B.y);
                 ctx.stroke();
+
+                drawEyes(A);
+            }
+
+            function drawEyes(ref){
+                ctx.save();
+
+                ctx.translate(ref.x,ref.y);
+
+                drawEye(Math.max(0,ref.xOffset),ref.yOffset);
+
+                ctx.scale(-1,1);
+
+                drawEye(Math.max(0,-ref.xOffset),ref.yOffset);
+                
+                ctx.restore();
+            }
+
+            function drawEye(scaleX,scaleY){
+                ctx.save();  
+                const verticalSquish=1-Math.abs(scaleY*0.4)
+                const horizontalSquish=1-scaleX*0.4
+                ctx.scale(horizontalSquish,verticalSquish);
+                ctx.beginPath();
+                ctx.moveTo(0.05,0.11);
+                ctx.quadraticCurveTo(0.06,0.18,0.20,0.19);
+                ctx.quadraticCurveTo(0.35,0.18,0.35,0.06);
+                ctx.quadraticCurveTo(0.35,0.02,0.19,0.02);
+                ctx.quadraticCurveTo(0.05,0.01,0.05,0.11);
+                ctx.fillStyle="white";
+                ctx.fill();
+
+                
+
+                ctx.beginPath();
+                ctx.fillStyle="black";
+                ctx.moveTo(0.07,0.07);
+                ctx.quadraticCurveTo(0.21,-0.01,0.33,0.08);
+                ctx.quadraticCurveTo(0.39,0.10,0.36,0.04);
+                ctx.quadraticCurveTo(0.19,-0.06,0.03,0.04);
+                ctx.quadraticCurveTo(0.02,0.09,0.07,0.07);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(0.17,0.09,0.065,0,Math.PI*2);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.moveTo(0.20,0.19);
+                ctx.quadraticCurveTo(0.35,0.18,0.35,0.06);
+                ctx.restore();
+                ctx.stroke();
+
+                
+                
+            }
+            // not used
+            function drawGlassEye(){
+                ctx.beginPath();
+                ctx.moveTo(0.05,0.11);
+                ctx.quadraticCurveTo(0.06,0.18,0.20,0.19);
+                ctx.quadraticCurveTo(0.35,0.18,0.35,0.06);
+                ctx.quadraticCurveTo(0.35,0.02,0.19,0.02);
+                ctx.quadraticCurveTo(0.05,0.01,0.05,0.11);
+                ctx.stroke();
+
             }
 
             function drawBody(){
@@ -119,15 +192,23 @@
             function updatePoints(info,attr){
                 for(let pId in livePoints){
                     const p=livePoints[pId];
+                    let yRange=p.yRange;
+                    let value=info.value;
+                    if(p.yNegRange){
+                        yRange=info.value<0?p.yNegRange:p.yRange;
+                        value=Math.abs(value);
+                    }
                     switch(attr){
                         case "x":
+                            p.xOffset=value;
                             p.x=lerp(p.xRange[0],p.xRange[1],info.value);
                             break;
                         case "y":
-                            p.y=lerp(p.yRange[0],p.yRange[1],info.value);  
+                        p.yOffset=value;
+                            p.y=lerp(yRange[0],yRange[1],value);  
                             break; 
                     }     
-                };  
+                }
             }
 
             function lerp(s,e,t){
