@@ -18,9 +18,9 @@
     <body>
         <canvas id="myCanvas"></canvas>
         <div id="sliders">
-            x: <input type="range" min="-1" max="1" step="0.1" onChange="updatePoints(this,'x')"/>
+            x: <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updatePoints(this,'x')"/>
             <br>
-            y: <input type="range" min="-1" max="1" step="0.1" onChange="updatePoints(this,'y')"/>
+            y: <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updatePoints(this,'y')"/>
         </div>
         <script>
             const canvas=document.getElementById("myCanvas");
@@ -75,13 +75,13 @@
                 drawBody();
                 drawHead();
 
-                //drawPoint(A,"A");
+                drawPoint(A,"A");
                 drawPoint(B,"B");
                 drawPoint(C,"C");
             }
 
             function drawHead(){
-                
+                ctx.strokeStyle="gray";
                 ctx.beginPath();
                 ctx.moveTo(B.x,B.y);
                 ctx.quadraticCurveTo(A.x,A.y,C.x,C.y);
@@ -97,18 +97,90 @@
                 ctx.quadraticCurveTo(0.44,-0.71,B.x,B.y);
                 ctx.stroke();
 
+                ctx.strokeStyle="black";
+
                 drawEyes(A);
+
+                drawBeard(A);
+            }
+
+            function drawBeard(ref){
+                ctx.save();
+                ctx.translate(ref.x,ref.y);
+
+                drawHalfBeard(
+                    Math.max(0,ref.xOffset),
+                    ref.yOffset,
+                    Math.min(0,ref.yOffset),
+                    Math.min(0,ref.xOffset));
+                
+                ctx.scale(-1,1);
+
+                drawHalfBeard(
+                    Math.max(0,-ref.xOffset),
+                    ref.yOffset,
+                    Math.min(0,ref.yOffset),
+                    Math.min(0,-ref.xOffset));
+                
+
+
+                ctx.restore();
+            }
+
+            function drawHalfBeard(scaleX,scaleY,verticalScaler,horizontalScaler){
+                ctx.save(); 
+                const horizontalSquish=1-scaleX*0.45
+                const verticalSquish=1-Math.abs(scaleY*0.2)
+                ctx.scale(horizontalSquish,verticalSquish);
+
+
+                ctx.beginPath();
+                ctx.moveTo(0.41,0.09);
+                ctx.quadraticCurveTo(0.35,0.28,0.17,0.36);
+                ctx.quadraticCurveTo(0.09,0.33,0,0.35);
+
+
+                ctx.lineTo(0.01,0.38);
+                ctx.lineTo(0.11,0.42);
+                ctx.lineTo(0.06,0.49);
+                ctx.lineTo(0.04,0.46);
+                ctx.lineTo(0.01,0.46);
+                
+
+                const bottomMostPoint={
+                    x:0,
+                    y:0.59-verticalScaler*0.2,
+                }
+                ctx.lineTo(bottomMostPoint.x,bottomMostPoint.y);
+                
+                const rightMostPoint={
+                    x:0.44-horizontalScaler*0.2,
+                    y:0.09,
+                }
+
+                const controlPoint={
+                    x:0.35-horizontalScaler*0.2,
+                    y:0.46-verticalScaler*0.2,
+                }
+
+               
+
+                ctx.quadraticCurveTo(
+                    controlPoint.x,controlPoint.y,
+                    rightMostPoint.x,rightMostPoint.y);
+                ctx.closePath();
+
+                ctx.restore();
+                ctx.stroke();
             }
 
             function drawEyes(ref){
                 ctx.save();
-
                 ctx.translate(ref.x,ref.y);
 
                 drawEye(Math.max(0,ref.xOffset),ref.yOffset);
 
                 ctx.scale(-1,1);
-
                 drawEye(Math.max(0,-ref.xOffset),ref.yOffset);
                 
                 ctx.restore();
@@ -116,7 +188,7 @@
 
             function drawEye(scaleX,scaleY){
                 ctx.save();  
-                const verticalSquish=1-Math.abs(scaleY*0.4)
+                const verticalSquish=1-Math.abs(scaleY*0.2)
                 const horizontalSquish=1-scaleX*0.4
                 ctx.scale(horizontalSquish,verticalSquish);
                 ctx.beginPath();
@@ -165,6 +237,8 @@
             }
 
             function drawBody(){
+                ctx.strokeStyle="gray";
+
                 ctx.beginPath();
                 ctx.moveTo(-0.25,0.21);
                 ctx.quadraticCurveTo(-0.21,0.41,-0.23,0.61);
@@ -175,6 +249,8 @@
                 ctx.lineTo(+0.23,0.61);
                 ctx.quadraticCurveTo(+0.21,0.41,+0.25,0.21);
                 ctx.stroke();
+                ctx.strokeStyle="black";
+
             }
 
             function drawPoint(loc,label,rad=0.07){

@@ -1,5 +1,18 @@
 No. of Projects done = 82
 
+Technologies that I Know:
+	Spring-Boot
+	Django
+	React
+	MySql
+	MongoDB
+	MERN
+	HTML
+	CSS
+	Javascript
+	Python
+	Java
+
 
 
 
