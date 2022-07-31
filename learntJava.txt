@@ -965,3 +965,5 @@ ALTER TABLE Persons AUTO_INCREMENT=100;
 INSERT INTO Persons (FirstName,LastName)
 VALUES ('Lars','Monsen');
 
+
+SELECT * FROM Orders WHERE OrderDate='2008-11-11'
