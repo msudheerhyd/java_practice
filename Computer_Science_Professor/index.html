@@ -22,6 +22,11 @@
             <br>
             y: <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updatePoints(this,'y')"/>
         </div>
+
+        <script src="utils.js"></script>
+        <script src="body.js"></script>
+        <script src="head.js"></script>
+
         <script>
             const canvas=document.getElementById("myCanvas");
             canvas.width=300;
@@ -29,6 +34,7 @@
 
             const ctx=canvas.getContext("2d");
 
+            // prepare canvas so coordinates are in [-1,1]
             ctx.lineWidth=0.01;
             ctx.translate(canvas.width/2,canvas.height/2);
             ctx.scale(canvas.width*0.5,canvas.height*0.5);
@@ -51,18 +57,8 @@
                 animate();
             }
 
+            // TO-DO: Remove this when done designing the character
             canvas.addEventListener("click", getCoords);
-
-            function animate(){
-                ctx.clearRect(-1,-1,2,2);
-                ctx.globalAlpha=0.2;
-                ctx.drawImage(img,-1,-1,2,2);
-                ctx.globalAlpha=1;
-
-                drawMe();
-                requestAnimationFrame(animate);
-            }
-
             function getCoords(evt){
                 const x=(evt.x-canvas.width/2)/(canvas.width/2);
                 const y=(evt.y-canvas.height/2)/(canvas.height/2);
@@ -72,337 +68,36 @@
                 }
                 console.log(offset.x.toFixed(2)+","+offset.y.toFixed(2)); 
             }
+            // END TO-DO
 
+            function animate(){
+                // TO-DO: Remove this when done designing the character
+                ctx.clearRect(-1,-1,2,2);
+                /*
+                ctx.globalAlpha=0.2;
+                ctx.drawImage(img,-1,-1,2,2);
+                ctx.globalAlpha=1;
+                */
+                // END TO-DO
+
+                drawMe();
+                requestAnimationFrame(animate);
+            }
 
             function drawMe(){
                 ctx.save();
-                ctx.translate(A.xOffset*0.02,0);
+                ctx.translate(A.xOffset*0.02,-0.06);
                 ctx.scale(1-Math.abs(A.xOffset)*0.04,1);
                 drawBody();
                 ctx.restore();
                 drawHead();
-/*
-                drawPoint(A,"A");
-                drawPoint(B,"B");
-                drawPoint(C,"C");   */
+        
+     //          drawPoint(A,"A");
+     //          drawPoint(B,"B");
+    //           drawPoint(C,"C");       
             }
 
-            function drawHead(){
-                ctx.strokeStyle="gray";
-                ctx.beginPath();
-                ctx.moveTo(B.x,B.y);
-                ctx.quadraticCurveTo(A.x,A.y,C.x,C.y);
-                ctx.moveTo(-0.45,-0.13);
-                ctx.quadraticCurveTo(A.x,A.y,0.45,-0.13);
-                ctx.stroke();
-
-
-                ctx.beginPath();
-                ctx.moveTo(B.x,B.y);
-                ctx.quadraticCurveTo(-0.44,-0.71,-0.45,-0.13);
-                ctx.quadraticCurveTo(-0.37,0.28,C.x,C.y);
-                ctx.quadraticCurveTo(0.37,0.28,0.45,-0.13);
-                ctx.quadraticCurveTo(0.44,-0.71,B.x,B.y);
-                ctx.stroke();
-                ctx.fillStyle=skinTone;
-                ctx.fill();
-
-                ctx.strokeStyle="black";
-
-                drawEyes(A);
-
-                drawBeard(A);
-
-                drawHair(A);
-
-                drawNose(A);
-
-            }
-
-            function drawNose(ref){
-                ctx.save();
-                ctx.translate(ref.x,ref.y);
-
-                ctx.beginPath();
-                ctx.moveTo(0,0.2);
-
-                const tip={
-                    x:ref.xOffset*0.2,
-                    y:0.29  
-                }
-
-                //TO-DO
-                //2 control points
-                //do something about the line
-                ctx.quadraticCurveTo(tip.x,tip.y,0,0.33);
-                ctx.stroke();
-                ctx.restore();
-            }
-
-
-            function drawHair(ref){
-                ctx.save();
-                ctx.translate(ref.x,ref.y);
-
-                drawHalfHair(
-                    Math.max(0,ref.xOffset),
-                    ref.yOffset,
-                    ref.yOffset,
-                    Math.min(0,ref.xOffset));
-                
-                ctx.scale(-1,1);
-
-                drawHalfHair(
-                    Math.max(0,-ref.xOffset),  
-                    ref.yOffset,
-                    ref.yOffset, 
-                    Math.min(0,-ref.xOffset));
-                
-                ctx.restore();
-            }
-
-            function drawHalfHair(scaleX,scaleY,verticalScaler,horizontalScaler){
-                ctx.save(); 
-                const horizontalSquish=1-scaleX*0.45
-                const verticalSquish=1;//1-Math.abs(scaleY*0.2)
-                ctx.scale(horizontalSquish,verticalSquish);
-
-                
-                ctx.beginPath();
-                ctx.moveTo(0.39,0.09);
-                ctx.quadraticCurveTo(0.47,-0.44,0,-0.44);
-
-                const topMostPoint={
-                    x:0,
-                    y:-0.65-verticalScaler*0.2,
-                }
-
-                ctx.lineTo(topMostPoint.x,topMostPoint.y);
-
-                const rightMostPoint={
-                    x:0.46-horizontalScaler*0.2,
-                    y:0.09,
-                }
-
-                const controlPoint={
-                    x:0.6-horizontalScaler*0.2,
-                    y:-0.6-verticalScaler*0.2,
-                }
-
-
-                ctx.quadraticCurveTo(
-                    controlPoint.x,controlPoint.y,
-                    rightMostPoint.x,rightMostPoint.y);
-
-                ctx.closePath();
-
-                ctx.restore();
-                ctx.fillStyle="black";
-                ctx.fill();
-            }
-
-            function drawBeard(ref){
-                ctx.save();
-                ctx.translate(ref.x,ref.y);
-
-                drawHalfBeard(
-                    Math.max(0,ref.xOffset),
-                    ref.yOffset,
-                    Math.min(0,ref.yOffset),
-                    Math.min(0,ref.xOffset));
-                
-                ctx.scale(-1,1);
-
-                drawHalfBeard(
-                    Math.max(0,-ref.xOffset),
-                    ref.yOffset,
-                    Math.min(0,ref.yOffset),
-                    Math.min(0,-ref.xOffset));
-                
-
-
-                ctx.restore();
-            }
-
-            function drawHalfBeard(scaleX,scaleY,verticalScaler,horizontalScaler){
-                ctx.save(); 
-                const horizontalSquish=1-scaleX*0.45
-                const verticalSquish=1-Math.abs(scaleY*0.2)
-                ctx.scale(horizontalSquish,verticalSquish);
-
-
-                ctx.beginPath();
-                ctx.moveTo(0.39,0.09);
-                ctx.quadraticCurveTo(0.31,0.28,0.17,0.36);
-                ctx.quadraticCurveTo(0.09,0.33,0,0.35);
-
-
-                ctx.lineTo(0.01,0.38);
-                ctx.lineTo(0.11,0.42);
-                ctx.lineTo(0.06,0.49);
-                ctx.lineTo(0.04,0.46);
-                ctx.lineTo(0,0.46);
-                
-
-                const bottomMostPoint={
-                    x:0,
-                    y:0.59-verticalScaler*0.3,
-                }
-                ctx.lineTo(bottomMostPoint.x,bottomMostPoint.y);
-                 
-                const rightMostPoint={
-                    x:0.46-horizontalScaler*0.2,
-                    y:0.09,
-                }
-
-                const controlPoint={
-                    x:0.38-horizontalScaler*0.2,
-                    y:0.46-verticalScaler*0.3,
-                }
-
-               
-
-                ctx.quadraticCurveTo(
-                    controlPoint.x,controlPoint.y,
-                    rightMostPoint.x,rightMostPoint.y);
-                ctx.closePath();
-
-                ctx.restore();
-                ctx.fillStyle="black";
-                ctx.fill();
-            }
-
-            function drawEyes(ref){
-                ctx.save();
-                ctx.translate(ref.x,ref.y);
-
-                drawEye(Math.max(0,ref.xOffset),ref.yOffset);
-
-                ctx.scale(-1,1);
-                drawEye(Math.max(0,-ref.xOffset),ref.yOffset);
-                
-                ctx.restore();
-            }
-
-            function drawEye(scaleX,scaleY){
-                ctx.save();  
-                const verticalSquish=1-Math.abs(scaleY*0.2)
-                const horizontalSquish=1-scaleX*0.4
-                ctx.scale(horizontalSquish,verticalSquish);
-                ctx.beginPath();
-                ctx.moveTo(0.05,0.11);
-                ctx.quadraticCurveTo(0.06,0.18,0.20,0.19);
-                ctx.quadraticCurveTo(0.35,0.18,0.35,0.06);
-                ctx.quadraticCurveTo(0.35,0.02,0.19,0.02);
-                ctx.quadraticCurveTo(0.05,0.01,0.05,0.11);
-                ctx.fillStyle="white";
-                ctx.fill();
-
-                
-
-                ctx.beginPath();
-                ctx.fillStyle="black";
-                ctx.moveTo(0.07,0.07);
-                ctx.quadraticCurveTo(0.21,-0.01,0.33,0.08);
-                ctx.quadraticCurveTo(0.39,0.10,0.36,0.04);
-                ctx.quadraticCurveTo(0.19,-0.06,0.03,0.04);
-                ctx.quadraticCurveTo(0.02,0.09,0.07,0.07);
-                ctx.fill();
-
-                ctx.beginPath();
-                ctx.arc(0.17,0.09,0.065,0,Math.PI*2);
-                ctx.fill();
-
-                ctx.beginPath();
-                ctx.moveTo(0.20,0.19);
-                ctx.quadraticCurveTo(0.35,0.18,0.35,0.06);
-                ctx.restore();
-                ctx.stroke();
-                
-            }
-            // not used
-            function drawGlassEye(){
-                ctx.beginPath();
-                ctx.moveTo(0.05,0.11);
-                ctx.quadraticCurveTo(0.06,0.18,0.20,0.19);
-                ctx.quadraticCurveTo(0.35,0.18,0.35,0.06);
-                ctx.quadraticCurveTo(0.35,0.02,0.19,0.02);
-                ctx.quadraticCurveTo(0.05,0.01,0.05,0.11);
-                ctx.stroke();
-
-            }
-
-            function drawBody(){
-                
-                ctx.strokeStyle="gray";
-
-                ctx.beginPath();
-                ctx.moveTo(-0.25+A.xOffset*0.05,
-                    0.28+A.yOffset*0.1);
-                ctx.quadraticCurveTo(-0.21,0.41,-0.23,0.61);
-                ctx.lineTo(-0.85,0.85);
-                ctx.lineTo(-0.89,1.1);
-                ctx.lineTo(+0.89,1.1);
-                ctx.lineTo(+0.85,0.85);
-                ctx.lineTo(+0.23,0.61);
-                ctx.quadraticCurveTo(+0.21,0.41,
-                    +0.25+A.xOffset*0.05,
-                    0.28+A.yOffset*0.1);
-                ctx.strokeStyle="black";
-                ctx.fillstyle=skinTone;
-                ctx.fill();
-                ctx.stroke();
-                
-
-
-
-                ctx.fillStyle=shirtColor;
-
-                ctx.beginPath();
-                ctx.moveTo(0,0.88)
-                ctx.lineTo(-0.41,0.65)
-                ctx.lineTo(-0.84,0.81)
-                ctx.quadraticCurveTo(-0.93,0.87,-0.95,1.1);
-                ctx.lineTo(0.95,1.1)
-                ctx.quadraticCurveTo(0.93,0.87,0.84,0.81);
-                ctx.lineTo(0.41,0.65)
-                ctx.closePath();
-                ctx.fill();
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(-0.41,0.71)
-                ctx.quadraticCurveTo(-0.52,0.67,-0.47,0.61);
-                ctx.quadraticCurveTo(-0.37,0.53,-0.18,0.73);
-                ctx.quadraticCurveTo(-0.03,0.74,0.11,0.87);
-                ctx.quadraticCurveTo(-0.13,0.92,-0.25,0.82);
-                ctx.stroke();
-                ctx.fill();
-
-                ctx.beginPath();
-                ctx.moveTo(-0.17,0.87)
-                ctx.quadraticCurveTo(-0.01,0.78,0.15,0.77);
-                ctx.quadraticCurveTo(0.29,0.75,0.37,0.64);
-                ctx.quadraticCurveTo(0.43,0.58,0.49,0.61);
-                ctx.quadraticCurveTo(0.54,0.69,0.35,0.83);
-                ctx.quadraticCurveTo(0.24,0.89,0.08,0.90);
-                ctx.stroke();
-                ctx.quadraticCurveTo(-0.06,0.92,-0.17,0.87);
-                ctx.fill();
-            }
-
-            function drawPoint(loc,label,rad=0.07){
-                ctx.beginPath();
-                ctx.arc(loc.x,loc.y,rad,0,Math.PI*2);
-                ctx.fillStyle="green";
-                ctx.fill();  
-                ctx.fillStyle="white";
-                ctx.font=(rad*1.6)+"px Arial";
-                ctx.textAlign="center";
-                ctx.textBaseline="middle";          
-                ctx.fillText(label,loc.x,loc.y+rad*0.15);
-            }
-
+            // called when playing with sliders
             function updatePoints(info,attr){
                 for(let pId in livePoints){
                     const p=livePoints[pId];
@@ -423,10 +118,6 @@
                             break; 
                     }     
                 }
-            }
-
-            function lerp(s,e,t){
-                return s+(e-s)*t;
             }
 
         </script>

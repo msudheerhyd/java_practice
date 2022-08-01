@@ -967,3 +967,9 @@ VALUES ('Lars','Monsen');
 
 
 SELECT * FROM Orders WHERE OrderDate='2008-11-11'
+
+CREATE VIEW [Brazil Customers] AS
+SELECT CustomerName, ContactName
+FROM Customers
+WHERE Country = 'Brazil';
+
