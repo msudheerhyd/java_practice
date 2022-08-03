@@ -13,26 +13,34 @@
                 top:0;
                 left:310; 
             }
+            #camCanvas{
+                    max-width: 173px    ;
+            }
         </style>
     </head>
     <body>
         <canvas id="myCanvas"></canvas>
         <div id="sliders">
-            x: <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updatePoints(this,'x')"/>
+            x: <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'x')"/>
             <br>
-            y: <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updatePoints(this,'y')"/>
+            y: <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'y')"/>
+            <br>
+            <canvas id="camCanvas"></canvas>
         </div>
-
+        <script src="camera.js"></script>
         <script src="utils.js"></script>
-        <script src="body.js"></script>
-        <script src="head.js"></script>
-
+        <script src="avatar.js"></script>
+        <script src="eye.js"></script>
+        <script src="beard.js"></script>
+        <script src="hair.js"></script>
         <script>
+            const DEBUG=false;
             const canvas=document.getElementById("myCanvas");
             canvas.width=300;
             canvas.height=300;
 
             const ctx=canvas.getContext("2d");
+            const camCtx=camCanvas.getContext("2d");
 
             // prepare canvas so coordinates are in [-1,1]
             ctx.lineWidth=0.01;
@@ -44,14 +52,10 @@
             const skinTone="rgb(254,184,150)";
             const shirtColor="rgb(154,153,1)";
 
-            const livePoints={
-                A:{x:0,y:-0.13,xRange:[0,0.2],yRange:[-0.13,0.1],xOffset:0,yOffset:0},
-                B:{x:0,y:-0.77,xRange:[0,0.02],yRange:[-0.77,-0.73],xOffset:0,yOffset:0},
-                C:{x:0,y:0.46,xRange:[0,0.2],yRange:[0.46,0.48],yNegRange:[0.46,0.30],xOffset:0,yOffset:0}
-                
-            }
-            const {A,B,C}=livePoints;
 
+            // point A
+            const lookAt={x:0,y:-0.13,xRange:[0,0.2],yRange:[-0.13,0.1],xOffset:0,yOffset:0};
+            const avatar=new Avatar(lookAt);
 
             img.onload=function(){
                 animate();
@@ -63,8 +67,8 @@
                 const x=(evt.x-canvas.width/2)/(canvas.width/2);
                 const y=(evt.y-canvas.height/2)/(canvas.height/2);
                 const offset={
-                    x:x-A.x,
-                    y:y-A.y
+                    x:x-lookAt.x,
+                    y:y-lookAt.y
                 }
                 console.log(offset.x.toFixed(2)+","+offset.y.toFixed(2)); 
             }
@@ -77,49 +81,50 @@
                 ctx.globalAlpha=0.2;
                 ctx.drawImage(img,-1,-1,2,2);  
                 ctx.globalAlpha=1;
-                */
+                */                  
                 // END TO-DO
 
-                drawMe();
-                requestAnimationFrame(animate);
-            }
+                if(video){
+                    camCtx.drawImage(video,0,0);
+                    const imgData=camCtx.getImageData(0,0,camCanvas.width,camCanvas.height);
+                    const locs=getMarkedLocations(imgData);
+                    if(locs.length>0){
+                        const avg=average(locs); 
+                       // console.log(avg);
+                        const x=(avg.x-imgData.width/2)/imgData.width;
+                        const y=(avg.y-imgData.height/2)/imgData.height;
+                        console.log({x,y});
 
-            function drawMe(){
-                ctx.save();
-                ctx.translate(A.xOffset*0.02,-0.06);
-                ctx.scale(1-Math.abs(A.xOffset)*0.04,1);
-                drawBody();
-                ctx.restore();
-                drawHead();
-        
-     //          drawPoint(A,"A");
-     //          drawPoint(B,"B");
-    //           drawPoint(C,"C");       
-            }
+                        updateLookAt({value:x},'x');
+                        updateLookAt({value:y},'y');
+
+                    }
+                }
+
+                avatar.draw(ctx);
+                requestAnimationFrame(animate);
+            }      
 
             // called when playing with sliders
-            function updatePoints(info,attr){
-                for(let pId in livePoints){
-                    const p=livePoints[pId];
-                    let yRange=p.yRange;
-                    let value=info.value;
-                    if(p.yNegRange){
-                        yRange=info.value<0?p.yNegRange:p.yRange;
-                        value=Math.abs(value);
-                    }
-                    switch(attr){
-                        case "x":
-                            p.xOffset=value;
-                            p.x=lerp(p.xRange[0],p.xRange[1],info.value);
-                            break;
-                        case "y":
-                        p.yOffset=value;
-                            p.y=lerp(yRange[0],yRange[1],value);  
-                            break; 
-                    }     
+            function updateLookAt(info,attr){
+                const p=lookAt;
+                let yRange=p.yRange;
+                let value=info.value;
+                if(p.yNegRange){
+                    yRange=info.value<0?p.yNegRange:p.yRange;
+                    value=Math.abs(value);
                 }
+                switch(attr){
+                    case "x":
+                        p.xOffset=value;
+                        p.x=lerp(p.xRange[0],p.xRange[1],info.value);
+                        break;
+                    case "y":
+                    p.yOffset=value;
+                        p.y=lerp(yRange[0],yRange[1],value);  
+                        break; 
+                }     
             }
-
         </script>
     </body>
 </html>
