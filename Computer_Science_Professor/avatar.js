@@ -4,7 +4,29 @@ class Avatar{
         this.beard=new Beard();
         this.hair=new Hair();
         this.lookAt=lookAt;
+
+        this.particles=[
+            new Particle([this.lookAt.x,this.lookAt.y],true),
+            new Particle([this.lookAt.x,this.lookAt.y+0.3])
+        ];
+        this.segments=[
+            new Segment(this.particles[0],this.particles[1])
+        ]
     }
+
+    updatePhysicsItems(items){
+        items.forEach(i=>{
+            i.update();
+        });
+    }
+
+    drawPhysicsItems(items,ctx){
+        items.forEach(i=>{
+            i.draw(ctx);
+        });
+    }
+
+
     draw(ctx){
         ctx.save();
         ctx.translate(this.lookAt.xOffset*0.02,-0.06);
@@ -12,6 +34,13 @@ class Avatar{
         this.#drawBody(ctx);
         ctx.restore();
         this.#drawHead(ctx);
+ 
+        this.particles[0].location=[this.lookAt.x,this.lookAt.y];
+        this.updatePhysicsItems(this.particles);
+        this.drawPhysicsItems(this.particles,ctx);
+
+        this.updatePhysicsItems(this.segments);
+        this.drawPhysicsItems(this.segments,ctx);
         
         if(DEBUG){
             drawPoint(this.lookAt,"A");

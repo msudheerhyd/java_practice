@@ -33,6 +33,7 @@
         <script src="eye.js"></script>
         <script src="beard.js"></script>
         <script src="hair.js"></script>
+        <script src="physics.js"></script>
         <script>
             const DEBUG=false;
             const canvas=document.getElementById("myCanvas");
@@ -90,10 +91,8 @@
                     const locs=getMarkedLocations(imgData);
                     if(locs.length>0){
                         const avg=average(locs); 
-                       // console.log(avg);
-                        const x=(avg.x-imgData.width/2)/imgData.width;
-                        const y=(avg.y-imgData.height/2)/imgData.height;
-                        console.log({x,y});
+                        const x=(avg[0]-imgData.width/2)/imgData.width;
+                        const y=(avg[1]-imgData.height/2)/imgData.height;
 
                         updateLookAt({value:x},'x');
                         updateLookAt({value:y},'y');
