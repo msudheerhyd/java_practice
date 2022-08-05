@@ -27,6 +27,8 @@
             <br>
             <canvas id="camCanvas"></canvas>
         </div>
+
+        <script src="body.js"></script>
         <script src="camera.js"></script>
         <script src="utils.js"></script>
         <script src="avatar.js"></script>
@@ -56,7 +58,7 @@
 
             // point A
             const lookAt={x:0,y:-0.13,xRange:[0,0.2],yRange:[-0.13,0.1],xOffset:0,yOffset:0};
-            const avatar=new Avatar(lookAt);
+            const avatar=new Avatar(lookAt,shirtColor,skinTone);
 
             img.onload=function(){
                 animate();

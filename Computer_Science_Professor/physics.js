@@ -1,4 +1,19 @@
-const G=[0,0.01];
+
+
+class Physics{
+    static G=[0,0.01];
+    static updatePhysicsItems(items){
+        items.forEach(i=>{
+            i.update();
+        });
+    }
+
+    static drawPhysicsItems(items,ctx){
+        items.forEach(i=>{
+            i.draw(ctx);
+        });
+    }
+}
 
 class Particle{
     constructor(location,isFixed){
@@ -14,7 +29,7 @@ class Particle{
 
         const vel=subtract(this.location,this.oldLocation);                         
         let newLocation=add(this.location,vel);
-        newLocation=add(newLocation,G);
+        newLocation=add(newLocation,Physics.G);
         this.oldLocation=this.location;
         this.location=newLocation;
     }
