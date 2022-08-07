@@ -28,6 +28,8 @@
             <canvas id="camCanvas"></canvas>
         </div>
 
+        <script src="doublePendulum.js"></script>
+        <script src="pendulum.js"></script>
         <script src="body.js"></script>
         <script src="camera.js"></script>
         <script src="utils.js"></script>
@@ -57,7 +59,7 @@
 
 
             // point A
-            const lookAt={x:0,y:-0.13,xRange:[0,0.2],yRange:[-0.13,0.1],xOffset:0,yOffset:0};
+            const lookAt={x:0,y:-0.13,initX:0,initY:-0.13,xRange:[0,0.2],yRange:[-0.13,0.1],xOffset:0,yOffset:0};
             const avatar=new Avatar(lookAt,shirtColor,skinTone);
 
             img.onload=function(){

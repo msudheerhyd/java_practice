@@ -1,13 +1,11 @@
-
-
 class Physics{
-    static G=[0,0.01];
+    static G=[0,0.003];
     static updatePhysicsItems(items){
         items.forEach(i=>{
             i.update();
         });
     }
-
+    
     static drawPhysicsItems(items,ctx){
         items.forEach(i=>{
             i.draw(ctx);

@@ -1,17 +1,3 @@
-class HangingString{
-    constructor(initLoc){
-        this.initLoc=initLoc;
-        this.particles=[
-            new Particle([initLoc.x,initLoc.y],true),
-            new Particle([initLoc.x,initLoc.y+0.3])
-        ]
-        this.segments=[
-            new Segment(this.particles[0],this.particles[1])
-        ]
-    }
-}
-
-
 class Avatar{
     constructor(lookAt,shirtColor,skinTone){
         this.eye=new Eye();
@@ -20,31 +6,61 @@ class Avatar{
         this.body=new Body(shirtColor,skinTone);
         this.lookAt=lookAt;
 
-        this.leftString=new HangingString({x:-0.31,y:0.64});
-        this.rightString=new HangingString({x:0.31,y:0.64});
+        this.leftString=new Pendulum({x:-0.31,y:0.64});
+        this.rightString=new Pendulum({x:0.31,y:0.71});
+
+        this.frontHair=[
+            new DoublePendulum({x:-0.29,y:-0.41},0.3),
+            new DoublePendulum({x:-0.13,y:-0.45},0.35), 
+            new DoublePendulum({x:0.07,y:-0.44},0.32), 
+            new DoublePendulum({x:0.21,y:-0.44},0.3),
+            new DoublePendulum({x:0.34,y:-0.38},0.3)
+        ]
+
+        this.backHair=[
+            new DoublePendulum({x:-0.29,y:-0.21},0.8),
+            new DoublePendulum({x:-0.13,y:-0.25},0.85), 
+            new DoublePendulum({x:0.07,y:-0.24},0.82), 
+            new DoublePendulum({x:0.21,y:-0.24},0.8),
+            new DoublePendulum({x:0.30,y:-0.18},0.8)
+        ]
     }
 
     draw(ctx){
         ctx.save();
 
-        const xTranslate=this.lookAt.xOffset*0.02;
-        const xScale=1-Math.abs(this.lookAt.xOffset)*0.04;
-        ctx.translate(xTranslate,-0.07);
-        ctx.scale(xScale,1);
+        ctx.globalAlpha=0.5;
+        const bodyXTranslate=this.lookAt.xOffset*0.02;
+        const bodyXScale=1-Math.abs(this.lookAt.xOffset)*0.04;
+        ctx.translate(bodyXTranslate,-0.07);
+        ctx.scale(bodyXScale,1);
+
+        this.backHair.forEach(p=>{
+            p.update2([
+                this.lookAt.initX*2-this.lookAt.x+p.initLocation.x,
+                this.lookAt.initY*2-this.lookAt.y+p.initLocation.y,
+            ]);
+            p.draw(ctx);
+        });
 
         this.body.draw(this.lookAt,ctx);
         ctx.restore();
         this.#drawHead(ctx);
 
-        this.leftString.particles[0].location=[
-            this.leftString.initLoc.x+xTranslate*xScale,
-            this.leftString.initLoc.y 
-        ];
-        Physics.updatePhysicsItems(this.leftString.particles);
-        Physics.drawPhysicsItems(this.leftString.particles,ctx);
+        this.leftString.update(bodyXTranslate,bodyXScale);  
+        this.leftString.draw(ctx);  
 
-        Physics.updatePhysicsItems(this.leftString.segments);
-        Physics.drawPhysicsItems(this.leftString.segments,ctx);
+        this.rightString.update(bodyXTranslate,bodyXScale); 
+        this.rightString.draw(ctx);  
+
+        this.frontHair.forEach(p=>{
+            p.update2([
+                this.lookAt.x+p.initLocation.x,
+                this.lookAt.y+p.initLocation.y,
+            ]);
+            p.draw(ctx);
+        });
+
 
         if(DEBUG){
             drawPoint(this.lookAt,"A");
