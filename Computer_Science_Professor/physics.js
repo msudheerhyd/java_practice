@@ -1,8 +1,8 @@
 class Physics{
     static G=[0,0.003];
-    static updatePhysicsItems(items){
+    static updatePhysicsItems(items,gravityMultiplier){
         items.forEach(i=>{
-            i.update();
+            i.update(gravityMultiplier);
         });
     }
     
@@ -20,14 +20,14 @@ class Particle{
         this.isFixed=isFixed;
     }
 
-    update(){
+    update(gravityMultiplier=1){
         if(this.isFixed){
             return;
         }
 
         const vel=subtract(this.location,this.oldLocation);                         
         let newLocation=add(this.location,vel);
-        newLocation=add(newLocation,Physics.G);
+        newLocation=add(newLocation,scale(Physics.G,gravityMultiplier));
         this.oldLocation=this.location;
         this.location=newLocation;
     }

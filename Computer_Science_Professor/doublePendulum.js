@@ -12,9 +12,9 @@ class DoublePendulum{
         ]
     }
 
-    update2(attachLoc){
+    update2(attachLoc,gravityMultiplier){
         this.particles[0].location=attachLoc;
-        Physics.updatePhysicsItems(this.particles);
+        Physics.updatePhysicsItems(this.particles,gravityMultiplier);
         Physics.updatePhysicsItems(this.segments); 
     }
 

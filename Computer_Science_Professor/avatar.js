@@ -29,7 +29,6 @@ class Avatar{
     draw(ctx){
         ctx.save();
 
-        ctx.globalAlpha=0.5;
         const bodyXTranslate=this.lookAt.xOffset*0.02;
         const bodyXScale=1-Math.abs(this.lookAt.xOffset)*0.04;
         ctx.translate(bodyXTranslate,-0.07);
@@ -39,7 +38,7 @@ class Avatar{
             p.update2([
                 this.lookAt.initX*2-this.lookAt.x+p.initLocation.x,
                 this.lookAt.initY*2-this.lookAt.y+p.initLocation.y,
-            ]);
+            ],10);
             p.draw(ctx);
         });
 
