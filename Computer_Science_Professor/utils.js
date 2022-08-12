@@ -1,6 +1,6 @@
 // img processing
 
-function getMarkedLocations(imgData,color=[0,0,255],threshold=160){
+function getMarkedLocations(imgData,color=[0,0,255],threshold=190){
     const locs=[];
     const data=imgData.data;
     for(let i=0;i<=data.length;i+=4){
@@ -81,7 +81,7 @@ function lerp(s,e,t){
 
 // drawing misc
 
-function drawPoint(loc,label,rad=0.07){
+function drawPoint(ctx,loc,label,rad=0.07){
     ctx.beginPath();
     ctx.arc(loc.x,loc.y,rad,0,Math.PI*2);
     ctx.fillStyle="green";

@@ -1,7 +1,9 @@
 class Avatar{
     constructor(lookAt,shirtColor,skinTone){
+        this.mouth={x:0,y:0};
+
         this.eye=new Eye();
-        this.beard=new Beard();
+        this.beard=new Beard(this.mouth);
         this.hair=new Hair();
         this.body=new Body(shirtColor,skinTone);
         this.lookAt=lookAt;
@@ -62,7 +64,7 @@ class Avatar{
 
 
         if(DEBUG){
-            drawPoint(this.lookAt,"A");
+            drawPoint(ctx,this.lookAt,"A");
         }
     }
 
@@ -74,15 +76,8 @@ class Avatar{
         const verticalSquish=1-Math.abs(this.lookAt.yOffset*0.2);
         const C={
             x:this.lookAt.x,
-            y:this.lookAt.y+(0.59-Math.min(0,this.lookAt.yOffset)*0.3)*verticalSquish,
+            y:this.lookAt.y+(0.54-Math.min(0,this.lookAt.yOffset)*0.3)*verticalSquish,
         }
-
-        ctx.moveTo(B.x,B.y);
-        ctx.quadraticCurveTo(this.lookAt.x,this.lookAt.y,C.x,C.y);
-        ctx.moveTo(-0.45,-0.13);
-        ctx.quadraticCurveTo(this.lookAt.x,this.lookAt.y,0.45,-0.13);
-        ctx.stroke();
-    
     
         ctx.beginPath();
         ctx.moveTo(B.x,B.y);
@@ -90,7 +85,6 @@ class Avatar{
         ctx.quadraticCurveTo(-0.37,0.28,C.x,C.y);
         ctx.quadraticCurveTo(0.37,0.28,0.45,-0.13);
         ctx.quadraticCurveTo(0.44,-0.71,B.x,B.y);
-        ctx.stroke();
         ctx.fillStyle=skinTone;
         ctx.fill();
     

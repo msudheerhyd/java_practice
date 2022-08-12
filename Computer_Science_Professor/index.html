@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE   html>
     <head>
         <title>Radu's Avatar</title>
         <style>
@@ -11,21 +11,30 @@
             #sliders{
                 position:absolute;
                 top:0;
-                left:310; 
+                left:310px; 
+                font-family:Arial;
             }
             #camCanvas{
-                    max-width: 173px    ;
+                    max-width: 173px;
             }
         </style>
     </head>
     <body>
         <canvas id="myCanvas"></canvas>
         <div id="sliders">
-            x: <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'x')"/>
+            Look At:<br>
+            X <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'x')"/>
             <br>
-            y: <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'y')"/>
+            Y <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'y')"/>
+            <br>
+            <br>
+            Mouth:<br>
+            X <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateMouth(this,'x')"/>
+            <br>
+            Y <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateMouth(this,'y')"/>
             <br>
             <canvas id="camCanvas"></canvas>
+            <button onclick="calibrate()">Calibrate</button>
         </div>
 
         <script src="doublePendulum.js"></script>
@@ -39,7 +48,7 @@
         <script src="hair.js"></script>
         <script src="physics.js"></script>
         <script>
-            const DEBUG=false;
+            const DEBUG=true;
             const canvas=document.getElementById("myCanvas");
             canvas.width=300;
             canvas.height=300;
@@ -90,18 +99,7 @@
                 // END TO-DO
 
                 if(video){
-                    camCtx.drawImage(video,0,0);
-                    const imgData=camCtx.getImageData(0,0,camCanvas.width,camCanvas.height);
-                    const locs=getMarkedLocations(imgData);
-                    if(locs.length>0){
-                        const avg=average(locs); 
-                        const x=(avg[0]-imgData.width/2)/imgData.width;
-                        const y=(avg[1]-imgData.height/2)/imgData.height;
-
-                        updateLookAt({value:x},'x');
-                        updateLookAt({value:y},'y');
-
-                    }
+                    processImage();
                 }
 
                 avatar.draw(ctx);
@@ -125,6 +123,17 @@
                     case "y":
                     p.yOffset=value;
                         p.y=lerp(yRange[0],yRange[1],value);  
+                        break; 
+                }     
+            }
+
+            function updateMouth(info,attr){
+                switch(attr){
+                    case "x":
+                        avatar.mouth.x=info.value;
+                        break;
+                    case "y":
+                        avatar.mouth.y=info.value; 
                         break; 
                 }     
             }

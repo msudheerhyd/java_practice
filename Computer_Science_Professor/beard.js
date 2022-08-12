@@ -1,6 +1,6 @@
 class Beard{
-    constructor(){
-
+    constructor(mouthInfo){
+        this.mouthInfo=mouthInfo;
     }
     draw(ref,ctx){
         ctx.save();
@@ -35,16 +35,17 @@ class Beard{
         ctx.quadraticCurveTo(0.31,0.28,0.17,0.36);
         ctx.quadraticCurveTo(0.09,0.33,0,0.35);
     
-    
+        const mouthStretchX=this.mouthInfo.x*0.1;
+        const mouthStretchY=this.mouthInfo.y*0.1;
         ctx.lineTo(0.01,0.38);
-        ctx.lineTo(0.11,0.42);
-        ctx.lineTo(0.06,0.49);
-        ctx.lineTo(0.04,0.46);
-        ctx.lineTo(0,0.46);
+        ctx.lineTo(0.11+mouthStretchX,0.42);
+        ctx.lineTo(0.06,0.49+mouthStretchY);
+        ctx.lineTo(0.04,0.47+mouthStretchY);
+        ctx.lineTo(0,0.47+mouthStretchY);
     
         const bottomMostPoint={
             x:0,
-            y:0.59-verticalScaler*0.3,
+            y:0.59-verticalScaler*0.3+mouthStretchY,
         }
         ctx.lineTo(bottomMostPoint.x,bottomMostPoint.y);
          
