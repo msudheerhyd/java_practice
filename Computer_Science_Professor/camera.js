@@ -28,16 +28,23 @@ function processImage(){
         }
     }
     if(locs.length>0){
-        const {nose,chest}=getConstelation(locs);
-        constelationPoints.nose=nose;
+        const {nose,chest,l,r,b}=getConstelation(locs);
+        constelationPoints.nose=nose
         constelationPoints.chest=chest;
+        constelationPoints.l=l;
+        constelationPoints.r=r;
+        constelationPoints.b=b;
 
-        drawPoint(camCtx,{x:nose[0],y:nose[1]},"N",20);
+        drawPoint(camCtx,{x:nose[0],y:nose[1]},"N",20)
         drawPoint(camCtx,{x:chest[0],y:chest[1]},"C",20);
+        drawPoint(camCtx,{x:l[0],y:l[1]},"L",20);
+        drawPoint(camCtx,{x:r[0],y:r[1]},"R",20);
+        drawPoint(camCtx,{x:b[0],y:b[1]},"B",20);
 
-        if(constelationPoints.ref){
+        const ref=constelationPoints.ref;
+        if(ref){
             const d1=distance(nose,chest);
-            const d2=distance(constelationPoints.ref.nose,constelationPoints.ref.chest);
+            const d2=distance(ref.nose,ref.chest);
 
             /*
             const avg=average(locs); 
@@ -50,6 +57,12 @@ function processImage(){
 
             updateLookAt({value:diffX},'x');
             updateLookAt({value:diffY},'y');
+
+            const bn1=distance(nose,b);
+            const bn2=distance(ref.nose,ref.b);
+            const bnDiffY=5*(bn1-bn2)/d1
+
+            updateMouth({value:bnDiffY},"y");
         }
     }
 }
@@ -66,9 +79,54 @@ function getConstelation(locs){
             nosePoint=locs[i];
         }
     }
+
+    let lPoint=locs[0]; 
+    maxDist=0;
+    for(let i=0;i<locs.length;i++){
+        const dist=distance(locs[i],chestPoint)
+            *distance(locs[i],nosePoint);
+        if(dist>maxDist){
+            maxDist=dist;
+            lPoint=locs[i];
+        }
+    }
+
+    let rPoint=locs[0]; 
+    maxDist=0;
+    for(let i=0;i<locs.length;i++){
+        const dist=distance(locs[i],chestPoint)
+            *distance(locs[i],nosePoint)
+            *distance(locs[i],lPoint);
+        if(dist>maxDist){
+            maxDist=dist;
+            rPoint=locs[i];
+        }
+    }
+
+    let bPoint=locs[0]; 
+    minDist=100000;
+    for(let i=0;i<locs.length;i++){
+        const dist=Math.pow(distance(locs[i],nosePoint),2)
+            +Math.pow(distance(locs[i],lPoint),2)
+            +Math.pow(distance(locs[i],rPoint),2)
+            +Math.pow(distance(locs[i],chestPoint),2);
+        if(dist<minDist){
+            minDist=dist;
+            bPoint=locs[i];
+        }
+    }
+
+    if(lPoint[0]>rPoint[0]){
+        [lPoint,rPoint]=[rPoint,lPoint];
+    }
+
+    
     return {
         nose:nosePoint,
-        chest:chestPoint
+        chest:chestPoint,
+        l:lPoint,
+        r:rPoint,
+        b:bPoint
     };
 }
 
@@ -76,5 +134,8 @@ function calibrate(){
     constelationPoints.ref={
         nose:constelationPoints.nose,
         chest:constelationPoints.chest,
+        l:constelationPoints.l,
+        r:constelationPoints.r,
+        b:constelationPoints.b
     }
 }
