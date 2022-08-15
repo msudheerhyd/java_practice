@@ -120,7 +120,32 @@ function getConstelation(locs){
         [lPoint,rPoint]=[rPoint,lPoint];
     }
 
-    
+    //average the values
+    const nSet=[];
+    const cSet=[];
+    const bSet=[];
+    const lSet=[];
+    const rSet=[];
+    for(let i=-0;i<locs.length;i++){
+        const nDist=distance(locs[i],nosePoint);
+        const cDist=distance(locs[i],chestPoint);
+        const bDist=distance(locs[i],bPoint);
+        const lDist=distance(locs[i],lPoint);
+        const rDist=distance(locs[i],rPoint);
+        const minDist=Math.min(nDist,cDist,bDist,lDist,rDist);
+        if(minDist==nDist){
+            nSet.push(locs[i]);
+        }else if(minDist==cDist){
+            cSet.push(locs[i]); 
+        }else if(minDist==bDist){
+            bSet.push(locs[i]); 
+        }else if(minDist==lDist){
+            lSet.push(locs[i]); 
+        }else if(minDist==rDist){
+            rSet.push(locs[i]); 
+    }
+
+
     return {
         nose:nosePoint,
         chest:chestPoint,
