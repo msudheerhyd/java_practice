@@ -1,6 +1,6 @@
 // img processing
 
-function getMarkedLocations(imgData,color=[0,0,255],threshold=190){
+function getMarkedLocations(imgData,color=[0,0,255],threshold=195){
     const locs=[];
     const data=imgData.data;
     for(let i=0;i<=data.length;i+=4){

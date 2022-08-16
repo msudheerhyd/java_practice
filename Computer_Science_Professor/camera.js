@@ -1,6 +1,18 @@
 const camCanvas=document.getElementById("camCanvas");
-let video=null;
-navigator.mediaDevices.getUserMedia({video:true})
+let video=document.createElement("video");
+video.src="test_vid.mp4";
+video.onloadeddata=function(){
+    camCanvas.width=video.videoWidth;
+    camCanvas.height=video.videoHeight;
+}
+
+function start(){
+    video.play();
+    video.volume=0; 
+}
+
+function initializeCamera(){
+    navigator.mediaDevices.getUserMedia({video:true})
     .then(function(data){
         video=document.createElement("video");
         video.srcObject=data;
@@ -12,6 +24,8 @@ navigator.mediaDevices.getUserMedia({video:true})
     }).catch(function(err){
         console.log(err);
     });
+}
+
 
 let constelationPoints={}
 function processImage(){
@@ -60,15 +74,23 @@ function processImage(){
 
             const bn1=distance(nose,b);
             const bn2=distance(ref.nose,ref.b);
-            const bnDiffY=5*(bn1-bn2)/d1
+            const bnDiffY=7*(bn1-bn2)/d1
 
+
+            const lr1=distance(l,r);
+            const lr2=distance(ref.l,ref.r);
+            const lrDiffX=9*(lr1-lr2)/d1
+
+            updateMouth({value:lrDiffX},"x");
             updateMouth({value:bnDiffY},"y");
+        }else{
+            calibrate();
         }
     }
 }
 
 function getConstelation(locs){
-    const chestPoint=locs.find(p=>p[1]==Math.max(...locs.map(l=>l[1])));
+    let chestPoint=locs.find(p=>p[1]==Math.max(...locs.map(l=>l[1])));
 
     let nosePoint=locs[0];
     let maxDist=0;
@@ -126,7 +148,7 @@ function getConstelation(locs){
     const bSet=[];
     const lSet=[];
     const rSet=[];
-    for(let i=-0;i<locs.length;i++){
+    for(let i=0;i<locs.length;i++){
         const nDist=distance(locs[i],nosePoint);
         const cDist=distance(locs[i],chestPoint);
         const bDist=distance(locs[i],bPoint);
@@ -143,7 +165,14 @@ function getConstelation(locs){
             lSet.push(locs[i]); 
         }else if(minDist==rDist){
             rSet.push(locs[i]); 
+        }
     }
+
+    nosePoint=average(nSet);
+    chestPoint=average(cSet);
+    bPoint=average(bSet);
+    lPoint=average(lSet);
+    rPoint=average(rSet);
 
 
     return {
@@ -154,6 +183,7 @@ function getConstelation(locs){
         b:bPoint
     };
 }
+
 
 function calibrate(){
     constelationPoints.ref={

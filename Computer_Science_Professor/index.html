@@ -8,7 +8,7 @@
             body{
                 margin:0;
             }
-            #sliders{
+            #side-pannel{
                 position:absolute;
                 top:0;
                 left:310px; 
@@ -17,24 +17,44 @@
             #camCanvas{
                     max-width: 173px;
             }
+            #sliders{
+                display:none;
+            }
+            #calibrateBtn{
+                display:none;
+            }
         </style>
     </head>
     <body>
         <canvas id="myCanvas"></canvas>
-        <div id="sliders">
-            Look At:<br>
-            X <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'x')"/>
+        <div id="side-pannel">
+            <div id="sliders"></div>
+                Look At:<br>
+                X <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'x')"/>
+                <br>
+                Y <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'y')"/>
+                <br>
+                <br>
+                Mouth:<br>
+                X <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateMouth(this,'x')"/>
+                <br>
+                Y <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateMouth(this,'y')"/>
+                <br>
+            </div>
+            <div id="vidOutput">
+                <canvas id="camCanvas"></canvas>
+                <button id="calibrateBtn"onclick="calibrate()">Calibrate</button>
+            </div>
+            <br><br>
+            INPUT:
             <br>
-            Y <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateLookAt(this,'y')"/>
-            <br>
-            <br>
-            Mouth:<br>
-            X <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateMouth(this,'x')"/>
-            <br>
-            Y <input type="range" min="-0.5" max="0.5" step="0.1" onChange="updateMouth(this,'y')"/>
-            <br>
-            <canvas id="camCanvas"></canvas>
-            <button onclick="calibrate()">Calibrate</button>
+            <select name="input" id="input" onchange="onInputChange(this)">
+                <option value="video">video</option>
+                <option value="camera">camera</option>
+                <option value="sliders">sliders</option>
+            </select>
+            <br><br>
+            <button onclick="start()">START</button>
         </div>
 
         <script src="doublePendulum.js"></script>
@@ -136,6 +156,10 @@
                         avatar.mouth.y=info.value; 
                         break; 
                 }     
+            }
+
+            function onInputChange(info){
+                console.log(info.value);
             }
         </script>
     </body>
